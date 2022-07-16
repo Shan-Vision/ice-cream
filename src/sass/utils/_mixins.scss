@@ -1,0 +1,174 @@
+// centers content of the element with flex parameter
+@mixin flex_center($display: flex) {
+  display: $display;
+  justify-content: center;
+  align-items: center;
+}
+
+// mixin for flex container
+// $gap — (horizontal) gap
+// $v_gap - vertical gap (if not defined, then equal to $gap)
+@mixin flex_grid($gap, $v_gap: null) {
+  @include flex_center();
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin: calc(-1 * #{$gap} / 2);
+
+  @if $v_gap {
+    margin-top: calc(-1 * #{$v_gap} / 2);
+    margin-bottom: calc(-1 * #{$v_gap} / 2);
+  }
+}
+
+// mixin for item in flex container
+// $cols — number of colons, $gap — (horizontal) gap
+// $v_gap - vertical gap (if not defined, then equal to $gap)
+@mixin flex_grid_item($cols, $gap, $v_gap: null) {
+  align-self: stretch;
+
+  width: calc((100% - (#{$gap} * #{$cols})) / #{$cols});
+  margin: calc(#{$gap} / 2);
+
+  @if $v_gap {
+    margin-top: calc(#{$v_gap} / 2);
+    margin-bottom: calc(#{$v_gap} / 2);
+  }
+}
+
+// mixin for buttons
+// $type — normal, inverted, small-normal, small-inverted
+// $width — if defined then ads fixed width parameter
+@mixin button($type: normal, $width: null) {
+  $bgc-hover: #ccc;
+  $bgc: teal;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  z-index: 3;
+  transition: all 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  @include flex_center();
+
+  font-family: inherit;
+  font-style: normal;
+  line-height: 1.3;
+
+  cursor: pointer;
+
+  @if $width {
+    width: $width;
+  }
+
+  @if $type == normal {
+    font-weight: 700;
+    font-size: 16px;
+    height: 44px;
+    border-radius: 22px;
+    padding: 0 22px;
+    color: var(--accent-color);
+    // background-color: var(--main-bg-color);
+    $bgc: var(--main-bg-color);
+    border: none;
+  } @else if $type == inverted {
+    font-weight: 700;
+    font-size: 16px;
+    height: 44px;
+    border-radius: 22px;
+    padding: 0 22px;
+    color: var(--inverted-text-color);
+    // background-color: var(--accent-color);
+    $bgc: var(--accent-color);
+    border: none;
+  } @else if $type == small-normal {
+    font-weight: 400;
+    font-size: 8px;
+    height: 24px;
+    border-radius: 12px;
+    padding: 0 12px;
+    @media screen and ($desktop) {
+      font-size: 14px;
+      height: 40px;
+      border-radius: 20px;
+      padding: 0 22px;
+    }
+    color: var(--accent-color);
+    // background-color: var(--main-bg-color);
+    $bgc: var(--main-bg-color);
+    border: none;
+  } @else if $type == small-inverted {
+    font-weight: 400;
+    font-size: 8px;
+    height: 24px;
+    border-radius: 12px;
+    padding: 0 12px;
+    @media screen and ($desktop) {
+      font-size: 14px;
+      height: 40px;
+      border-radius: 20px;
+      padding: 0 22px;
+    }
+    color: var(--inverted-text-color);
+    // background-color: var(--accent-color);
+    $bgc: var(--accent-color);
+    border: none;
+  } @else {
+    color: var(--accent-color);
+    // background-color: var(--main-bg-color);
+    $bgc: var(--main-bg-color);
+    border: none;
+  }
+
+  &:focus,
+  &:hover {
+    @if ($type == normal or $type == small-normal) {
+      color: var(--inverted-text-color);
+      // background-color: #ecebeb;
+      $bgc-hover: var(--accent-color);
+      border: none;
+    } @else if ($type == inverted or $type == small-inverted) {
+      color: var(--accent-color);
+      // background-color: #ecebeb;
+      $bgc-hover: var(--main-bg-color);
+      border: none;
+    } @else {
+      color: var(--inverted-text-color);
+      // background-color: #ecebeb;
+      $bgc-hover: var(--accent-color);
+      border: none;
+    }
+    &::before {
+      width: 110%;
+      border-radius: 50px;
+      transform: translateX(-2%);
+    }
+  }
+
+  &::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: ' ';
+    width: 25%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: $bgc-hover;
+    transform: translateX(-109%);
+    transition: all 0.5s cubic-bezier(0.68, -0.15, 0.265, 1.55);
+    z-index: -1;
+  }
+
+  &::after {
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    content: ' ';
+    height: calc(100% - 2px);
+    width: calc(100% - 2px);
+    border-radius: 50px;
+    background-color: $bgc;
+    transform: translateX(-2%);
+    z-index: -2;
+  }
+}

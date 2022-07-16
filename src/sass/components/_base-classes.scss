@@ -1,0 +1,90 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--main-font);
+}
+
+image {
+  display: block;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @media screen and ($mobile) {
+    min-width: 320px;
+    max-width: 480px;
+  }
+
+  @media screen and ($tablet) {
+    width: 768px;
+    padding: 0 34px;
+  }
+
+  @media screen and ($desktop) {
+    width: 1200px;
+    padding: 0 74px;
+  }
+
+  transition: all var(--transition-params);
+}
+
+.section__heading {
+  color: var(--accent-color);
+
+  font-family: var(--accent-font);
+  font-weight: 400;
+  font-size: 34px;
+  letter-spacing: 0.04em;
+  line-height: 1.145;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  @media screen and ($tablet) {
+    font-size: 48px;
+  }
+
+  @media screen and ($desktop) {
+    font-size: 58px;
+  }
+
+  &--left {
+    text-align: left;
+  }
+
+  transition: all var(--transition-params);
+}
+
+.section__subtitle {
+  color: var(--secondary-text-color);
+
+  font-family: var(--accent-font);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.17;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  margin-bottom: 15px;
+
+  @media screen and ($tablet) {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  @media screen and ($desktop) {
+    font-size: 30px;
+    line-height: 1.13;
+  }
+
+  &--left {
+    text-align: left;
+  }
+
+  transition: all var(--transition-params);
+}
