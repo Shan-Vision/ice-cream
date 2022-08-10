@@ -6,7 +6,7 @@
   "homepage": "https://Shan-Vision.github.io/ice-cream-study-project",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /neekso-icecream/"
+    "build": "parcel build src/*.html --public-url /ice-cream-study-project/"
   },
   "repository": {
     "type": "git",
